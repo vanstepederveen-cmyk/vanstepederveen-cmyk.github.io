@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Step One</title>
+<!-- Voorportaal voor het beginscherm (12-10): de Apps Script-app kan zelf geen telefoonicoon aanbieden.
+     Dit pagina'tje geeft het Step One-icoon en stuurt door naar de kantoorlink.
+     Geopend vanaf het beginscherm (standalone) → meteen door; gewoon in de browser → uitleg + knop. -->
+<meta name="apple-mobile-web-app-title" content="Step One">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="application-name" content="Step One">
+<meta name="theme-color" content="#1C2440">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+  html,body{margin:0;height:100%;background:#1C2440;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  main{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;box-sizing:border-box;text-align:center}
+  img{width:96px;height:96px;border-radius:22px}
+  h1{margin:0;font-size:26px}
+  p{margin:0;font-size:15px;line-height:1.5;color:rgba(255,255,255,.8);max-width:340px}
+  a.knop{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 26px;border-radius:12px;background:#fff;color:#1C2440;font-weight:800;text-decoration:none;font-size:16px}
+  .uitleg{display:none}
+</style>
+</head>
+<body>
+<main>
+  <img src="icon-192.png" alt="">
+  <h1>Step One</h1>
+  <p id="bezig">Step One wordt geopend…</p>
+  <div class="uitleg" id="uitleg">
+    <p><b>Op je beginscherm zetten:</b><br>
+      iPhone: Safari → Delen <span aria-hidden="true">⬆︎</span> → <b>Zet op beginscherm</b><br>
+      Android: Chrome → ⋮ → <b>Toevoegen aan startscherm</b></p>
+  </div>
+  <a class="knop" id="open" href="https://script.google.com/macros/s/AKfycbzzIolTbQgKLhTrZ54aS3_F04iwj1kxP2V0HuxUyucEsgO-NbwLaBDeQ0A1ZcVZn6Y9/exec?kantoor">Open Step One</a>
+</main>
+<script>
+  var APP = document.getElementById('open').href;
+  var vanafBeginscherm = (window.navigator.standalone === true) ||
+    (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches);
+  if(vanafBeginscherm){
+    location.replace(APP);
+  } else {
+    document.getElementById('bezig').style.display = 'none';
+    document.getElementById('uitleg').style.display = 'block';
+  }
+</script>
+</body>
+</html>
